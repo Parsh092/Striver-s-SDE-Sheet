@@ -1,0 +1,18 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+       ArrayList<List<Integer>> ans = new  ArrayList<List<Integer>>();
+        for(int i=0;i<numRows;i++){
+            ArrayList<Integer> tem = new ArrayList<>();
+            for(int j=0;j<=i;j++){
+                if(j==0 || j==i) tem.add(1);
+                else{
+                    int a = ans.get(i-1).get(j-1);
+                    int b = ans.get(i-1).get(j);
+                    tem.add(a+b);
+                }
+            }
+            ans.add(tem);
+        }
+        return ans;
+    }
+}
