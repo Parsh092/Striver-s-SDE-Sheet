@@ -1,0 +1,32 @@
+class Solution {
+    public void sortColors(int[] nums) {
+       // By using the Dutch National Flag Algorithm
+       /*
+        0 - (low-1) == All 0
+        low - (mid-1) == All 1
+        mid-high-1 == unsorted
+        high - end == All 2
+        */
+        int low=0;
+        int mid=0;
+        int high=nums.length-1;
+        while(mid<=high){
+            
+            if(nums[mid]==0){
+                int tem = nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=tem;
+                low++;
+                mid++;
+            }
+            else if(nums[mid]==1) mid++;
+            else{
+                int tem = nums[mid];
+                nums[mid]=nums[high];
+                nums[high]=tem;
+                high--;
+            }
+        }
+        return;
+    }
+}
