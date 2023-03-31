@@ -1,0 +1,22 @@
+class Solution {
+    public int[][] merge(int[][] arr) {
+        Arrays.sort(arr,(a,b)->a[0]-b[0]);
+       List<int[]> ans = new ArrayList<>();
+
+       int a = arr[0][0];
+       int b = arr[0][1];
+
+       for(int[] tem : arr){
+           if(tem[0]<=b){
+               b = Math.max(b,tem[1]);
+           }
+           else{
+               ans.add(new int[]{a,b});
+               a = tem[0];
+               b = tem[1];
+           }
+       }
+       ans.add(new int[]{a,b});
+       return ans.toArray(new int[0][1]);
+    }
+}
