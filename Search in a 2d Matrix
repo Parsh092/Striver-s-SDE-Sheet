@@ -1,0 +1,17 @@
+class Solution {
+    static boolean sm(int i,int j,int[][] matrix, int target){
+        if(i<0 || j<0) return false;
+        if(matrix[i][j]==target) return true;
+        if(i==0 && j==0) return matrix[i][j]==target;
+        boolean up=false;
+        boolean left=false;
+        if(i>0){
+          if(matrix[i-1][j]>=target) up = sm(i-1,j,matrix,target);
+        }
+        if(j>=0)left = sm(i,j-1,matrix,target);
+        return up || left;
+    }
+    public boolean searchMatrix(int[][] matrix, int target) {
+        return sm(matrix.length-1,matrix[0].length-1,matrix,target);
+    }
+}
