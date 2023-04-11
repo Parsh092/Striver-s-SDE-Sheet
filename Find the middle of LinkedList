@@ -1,0 +1,7 @@
+ LinkedList<ListNode> arr = new LinkedList<>();
+        ListNode tem = head;
+        while(tem!=null){
+            arr.add(tem);
+            tem=tem.next;
+        }
+        return arr.get(arr.size()/2);
