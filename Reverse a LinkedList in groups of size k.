@@ -1,0 +1,26 @@
+if(head==null || k==1) return head;
+        int count=0;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode curr = dummy,nextNode = dummy,prev = dummy;
+        
+        while(curr.next!=null){
+            count++;
+            curr=curr.next;
+        }
+
+        while(count>=k){
+            curr = prev.next;
+            nextNode = curr.next;
+
+            for(int i=1;i<k;i++){
+                curr.next = nextNode.next;
+                nextNode.next = prev.next;
+                prev.next = nextNode;
+                nextNode = curr.next;
+            }
+            prev=curr;
+            count-=k;
+        }
+        return dummy.next;
+    }
