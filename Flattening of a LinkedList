@@ -1,0 +1,33 @@
+class GfG
+{
+    static Node merge(Node a , Node b){
+        Node tem = new Node(0);
+        Node res = tem;
+        while(a!=null && b!=null){
+            
+            if(a.data < b.data){
+                tem.bottom = a;
+                a = a.bottom;
+            }
+            else{
+                tem.bottom = b;
+                b=b.bottom;
+            } 
+            tem = tem.bottom;
+        }
+        
+        // Now take out all the element present in non-empty linkedlist
+        if(a!=null) tem.bottom = a;
+        else tem.bottom = b;
+        
+        // return the head of the linkedlist;
+        return res.bottom;
+    }
+    Node flatten(Node root)
+    {
+	  if(root==null || root.next == null) return root;
+	  Node nextList = flatten(root.next);
+	  Node tem = merge(root,nextList);
+	  return tem;
+    }
+}
