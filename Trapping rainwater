@@ -1,0 +1,47 @@
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        int[] leftMaxHeight = new int[n];
+        int[] rightMaxHeight = new int[n];
+
+        leftMaxHeight[0]=height[0];
+        for(int i=1;i<n;i++){
+            leftMaxHeight[i] = Math.max(leftMaxHeight[i-1],height[i]);
+        }
+
+        rightMaxHeight[n-1] = height[n-1];
+        for(int i=n-2;i>=0;i--){
+            rightMaxHeight[i] = Math.max(rightMaxHeight[i+1],height[i]);
+        }
+
+        int waterTrap = 0; 
+        for(int i=0;i<n;i++){
+            waterTrap+= Math.min(rightMaxHeight[i],leftMaxHeight[i]) - height[i];
+        }
+        return waterTrap;
+
+        /*
+        TLE :- 321/322 Test cases passed 
+        int ans = 0;
+        int n = height.length;
+        for(int i=0;i<n;i++){
+            int leftmax = 0;
+            int rightmax = 0;
+
+            int temindex = i;
+            while(temindex<n){
+                rightmax = Math.max(rightmax,height[temindex++]);
+            }
+
+            temindex = i;
+            while(temindex >= 0){
+                leftmax = Math.max(leftmax,height[temindex--]);
+            }
+
+            ans+= Math.min(leftmax,rightmax) - height[i];
+        }
+        return ans;
+        */
+
+    }
+}
