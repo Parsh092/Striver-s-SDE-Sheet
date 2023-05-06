@@ -1,0 +1,22 @@
+class Solution {
+    static int f(int i,int[] coins,int amount,int[][] dp){
+        if(amount == 0) return 0;
+        if(i<0 || amount < 0) return Integer.MAX_VALUE;
+        if(dp[i][amount]!=-1) return dp[i][amount];
+        int take = f(i,coins,amount-coins[i],dp);
+        if(take>=0 && take!=Integer.MAX_VALUE) take++;
+        int nottake = f(i-1,coins,amount,dp);
+        return dp[i][amount] = Math.min(take,nottake);
+    }
+    public int coinChange(int[] coins, int amount) {
+        int n = coins.length;
+        if(amount==0) return 0;
+        if(n==1 && coins[0]>amount) return -1;
+        int[][] dp = new int[n][amount+1];
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+        int CC = f(n-1,coins,amount,dp);
+        return CC!=Integer.MAX_VALUE?CC:-1;
+    }
+}
